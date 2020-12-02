@@ -1,2 +1,2 @@
 # Stat184FinalProject
-Final; Project for Stat 184
+Final Project for Stat 184
