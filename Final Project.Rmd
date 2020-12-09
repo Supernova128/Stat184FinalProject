@@ -9,4 +9,17 @@ output:
     df_print: paged
 ---
 
+```{r}
+# Libraries
+
+library(genius)
+library(tidyverse)
+library(qdap)
+library(tidytext)
+
+
+
+
+
+```
 
