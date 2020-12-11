@@ -1802,20 +1802,42 @@ summary {
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBMaWJyYXJpZXNcblxubGlicmFyeShnZW5pdXMpXG5saWJyYXJ5KHRpZHl2ZXJzZSlcbmxpYnJhcnkocWRhcClcbmxpYnJhcnkodGlkeXRleHQpXG5cblxuXG5cblxuYGBgIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBMaWJyYXJpZXNcblxubGlicmFyeShnZW5pdXMpXG5saWJyYXJ5KHRpZHl2ZXJzZSlcbmxpYnJhcnkocWRhcClcbmxpYnJhcnkodGlkeXRleHQpXG5saWJyYXJ5KHJ2ZXN0KVxuYGBgIn0= -->
 <pre class="r"><code># Libraries
 
 library(genius)
 library(tidyverse)
 library(qdap)
 library(tidytext)
-</code></pre>
+library(rvest)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBEYXRhIFNjcmFwaW5nXG5cbnBhZ2UgPSBcImh0dHBzOi8vZW4ud2lraXBlZGlhLm9yZy93aWtpL0dyYW1teV9Bd2FyZF9mb3JfUmVjb3JkX29mX3RoZV9ZZWFyXCJcblxuWFBBVEhnZW4gPSBcIi9odG1sL2JvZHkvZGl2WzNdL2RpdlszXS9kaXZbNV0vZGl2WzFdL3RhYmxlXCJcblxuWWVhcnMgPSBjKDE5ODAsMTk5MCwyMDAwLDIwMTApXG5cbmZvciAoaSBpbiAxOjQpe1xuICBUZW1wIDwtIHBhZ2UgJT4lXG4gIHJlYWRfaHRtbCgpICU+JVxuICBodG1sX25vZGVzKHhwYXRoID0gcGFzdGUoWFBBVEhnZW4sJ1snLGkrNCwnXScsc2VwID0gJycpKSAlPiVcbiAgaHRtbF90YWJsZShmaWxsID0gVFJVRSlcbiAgYXNzaWduKHBhc3RlKCdZZWFyJyxZZWFyc1tpXSwgc2VwID0gJycpLFRlbXBbWzFdXSlcbn1cbnJtKFRlbXAsaSxwYWdlLFhQQVRIZ2VuLFllYXJzKVxuYGBgIn0= -->
+<pre class="r"><code># Data Scraping
+
+page = &quot;https://en.wikipedia.org/wiki/Grammy_Award_for_Record_of_the_Year&quot;
+
+XPATHgen = &quot;/html/body/div[3]/div[3]/div[5]/div[1]/table&quot;
+
+Years = c(1980,1990,2000,2010)
+
+for (i in 1:4){
+  Temp &lt;- page %&gt;%
+  read_html() %&gt;%
+  html_nodes(xpath = paste(XPATHgen,&#39;[&#39;,i+4,&#39;]&#39;,sep = &#39;&#39;)) %&gt;%
+  html_table(fill = TRUE)
+  assign(paste(&#39;Year&#39;,Years[i], sep = &#39;&#39;),Temp[[1]])
+}
+rm(Temp,i,page,XPATHgen,Years)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogJ0ZpbmFsIFByb2plY3QnDQphdXRob3I6ICJEZXZhbnNoIEFnYXJ3YWwiDQpkYXRlOiAnRHVlIERhdGU6IDEyLzE1LzIwMjAnDQpvdXRwdXQ6DQogIGh0bWxfbm90ZWJvb2s6DQogICAgZGZfcHJpbnQ6IHBhZ2VkDQogIGh0bWxfZG9jdW1lbnQ6DQogICAgZGZfcHJpbnQ6IHBhZ2VkDQotLS0NCg0KYGBge3J9DQojIExpYnJhcmllcw0KDQpsaWJyYXJ5KGdlbml1cykNCmxpYnJhcnkodGlkeXZlcnNlKQ0KbGlicmFyeShxZGFwKQ0KbGlicmFyeSh0aWR5dGV4dCkNCg0KDQoNCg0KDQpgYGANCg0K</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogJ0ZpbmFsIFByb2plY3QnDQphdXRob3I6ICJEZXZhbnNoIEFnYXJ3YWwiDQpkYXRlOiAnRHVlIERhdGU6IDEyLzE1LzIwMjAnDQpvdXRwdXQ6DQogIGh0bWxfbm90ZWJvb2s6DQogICAgZGZfcHJpbnQ6IHBhZ2VkDQogIGh0bWxfZG9jdW1lbnQ6DQogICAgZGZfcHJpbnQ6IHBhZ2VkDQotLS0NCg0KYGBge3J9DQojIExpYnJhcmllcw0KDQpsaWJyYXJ5KGdlbml1cykNCmxpYnJhcnkodGlkeXZlcnNlKQ0KbGlicmFyeShxZGFwKQ0KbGlicmFyeSh0aWR5dGV4dCkNCmxpYnJhcnkocnZlc3QpDQpgYGANCg0KYGBge3J9DQojIERhdGEgU2NyYXBpbmcNCg0KcGFnZSA9ICJodHRwczovL2VuLndpa2lwZWRpYS5vcmcvd2lraS9HcmFtbXlfQXdhcmRfZm9yX1JlY29yZF9vZl90aGVfWWVhciINCg0KWFBBVEhnZW4gPSAiL2h0bWwvYm9keS9kaXZbM10vZGl2WzNdL2Rpdls1XS9kaXZbMV0vdGFibGUiDQoNClllYXJzID0gYygxOTgwLDE5OTAsMjAwMCwyMDEwKQ0KDQpmb3IgKGkgaW4gMTo0KXsNCiAgVGVtcCA8LSBwYWdlICU+JQ0KICByZWFkX2h0bWwoKSAlPiUNCiAgaHRtbF9ub2Rlcyh4cGF0aCA9IHBhc3RlKFhQQVRIZ2VuLCdbJyxpKzQsJ10nLHNlcCA9ICcnKSkgJT4lDQogIGh0bWxfdGFibGUoZmlsbCA9IFRSVUUpDQogIGFzc2lnbihwYXN0ZSgnWWVhcicsWWVhcnNbaV0sIHNlcCA9ICcnKSxUZW1wW1sxXV0pDQp9DQpybShUZW1wLGkscGFnZSxYUEFUSGdlbixZZWFycykNCmBgYA0KDQoNCg==</div>
 
 
 
