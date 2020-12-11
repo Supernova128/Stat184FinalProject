@@ -44,12 +44,6 @@ rm(Temp,i,page,XPATHgen) # Remove excess data
 ```{r}
 # Data Cleaning
 
-MusicCleaned <-
-  Music %>%
-  na.omit() %>% #Remove NAs
-  transmute(year = `Year[I]`)
-
-
 
 ```
 

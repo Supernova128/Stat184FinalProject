@@ -1839,26 +1839,26 @@ rm(Temp,i,page,XPATHgen) # Remove excess data
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBEYXRhIENsZWFuaW5nXG5cbk11c2ljQ2xlYW5lZCA8LVxuICBNdXNpYyAlPiVcbiAgbmEub21pdCgpICU+JSAjUmVtb3ZlIE5Bc1xuICB0cmFuc211dGUoeWVhciA9IGBZZWFyW0ldYFsxOjRdKVxuYGBgIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBEYXRhIENsZWFuaW5nXG5cblxuTXVzaWNDbGVhbmVkIDwtXG4gIE11c2ljICU+JVxuICBuYS5vbWl0KCkgJT4lICNSZW1vdmUgTkFzXG4gIHRpZHlyOjpleHRyYWN0KGBZZWFyW0ldYCwgaW50byA9IFwieWVhclwiLCByZWdleCA9IFwiKFteKFsuKj9dKV0pXCIpXG5gYGAifQ== -->
 <pre class="r"><code># Data Cleaning
+
 
 MusicCleaned &lt;-
   Music %&gt;%
   na.omit() %&gt;% #Remove NAs
-  transmute(year = `Year[I]`[1:4])</code></pre>
+  tidyr::extract(`Year[I]`, into = &quot;year&quot;, regex = &quot;([^([.*?])])&quot;)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3I6IFByb2JsZW0gd2l0aCBgbXV0YXRlKClgIGlucHV0IGB5ZWFyYC5cbnggSW5wdXQgYHllYXJgIGNhbid0IGJlIHJlY3ljbGVkIHRvIHNpemUgMjA0LlxuaSBJbnB1dCBgeWVhcmAgaXMgYGBZZWFyW0ldYFsxOjRdYC5cbmkgSW5wdXQgYHllYXJgIG11c3QgYmUgc2l6ZSAyMDQgb3IgMSwgbm90IDQuXG5SdW4gYHJsYW5nOjpsYXN0X2Vycm9yKClgIHRvIHNlZSB3aGVyZSB0aGUgZXJyb3Igb2NjdXJyZWQuXG4ifQ== -->
-<pre><code>Error: Problem with `mutate()` input `year`.
-x Input `year` can&#39;t be recycled to size 204.
-i Input `year` is ``Year[I]`[1:4]`.
-i Input `year` must be size 204 or 1, not 4.
-Run `rlang::last_error()` to see where the error occurred.</code></pre>
+<!-- rnb-output-begin eyJkYXRhIjoiUENSRSBwYXR0ZXJuIGNvbXBpbGF0aW9uIGVycm9yXG5cdCd1bm1hdGNoZWQgY2xvc2luZyBwYXJlbnRoZXNpcydcblx0YXQgJyknRXJyb3IgaW4gcmVnZXhwcihyZWdleCwgc3RyaW5nLCBwZXJsID0gVFJVRSkgOiBcbiAgaW52YWxpZCByZWd1bGFyIGV4cHJlc3Npb24gJyhbXihbLio/XSldKSdcbiJ9 -->
+<pre><code>PCRE pattern compilation error
+    &#39;unmatched closing parenthesis&#39;
+    at &#39;)&#39;Error in regexpr(regex, string, perl = TRUE) : 
+  invalid regular expression &#39;([^([.*?])])&#39;</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogJ0ZpbmFsIFByb2plY3QnDQphdXRob3I6ICJEZXZhbnNoIEFnYXJ3YWwiDQpkYXRlOiAnRHVlIERhdGU6IDEyLzE1LzIwMjAnDQpvdXRwdXQ6DQogIGh0bWxfbm90ZWJvb2s6DQogICAgZGZfcHJpbnQ6IHBhZ2VkDQogIGh0bWxfZG9jdW1lbnQ6DQogICAgZGZfcHJpbnQ6IHBhZ2VkDQotLS0NCg0KYGBge3J9DQojIExpYnJhcmllcw0KDQpsaWJyYXJ5KGdlbml1cykNCmxpYnJhcnkodGlkeXZlcnNlKQ0KbGlicmFyeShxZGFwKQ0KbGlicmFyeSh0aWR5dGV4dCkNCmxpYnJhcnkocnZlc3QpDQpgYGANCg0KYGBge3J9DQojIERhdGEgU2NyYXBpbmcNCg0KcGFnZSA9ICJodHRwczovL2VuLndpa2lwZWRpYS5vcmcvd2lraS9HcmFtbXlfQXdhcmRfZm9yX1JlY29yZF9vZl90aGVfWWVhciINCg0KWFBBVEhnZW4gPSAiL2h0bWwvYm9keS9kaXZbM10vZGl2WzNdL2Rpdls1XS9kaXZbMV0vdGFibGUiDQoNCk11c2ljIDwtIGRhdGEuZnJhbWUoKQ0KDQpmb3IgKGkgaW4gNTo4KXsgIyBMb29wIGZvciBlYWNoIGRlY2FkZQ0KICAjIFNjcmFwZSB3ZWJzaXRlDQogIFRlbXAgPC0gcGFnZSAlPiUgDQogICAgcmVhZF9odG1sKCkgJT4lDQogICAgaHRtbF9ub2Rlcyh4cGF0aCA9IHBhc3RlKFhQQVRIZ2VuLCdbJyxpLCddJyxzZXAgPSAnJykpICU+JQ0KICAgIGh0bWxfdGFibGUoZmlsbCA9IFRSVUUpDQogIE11c2ljIDwtIHJiaW5kKE11c2ljLFRlbXBbWzFdXSkNCn0NCg0Kcm0oVGVtcCxpLHBhZ2UsWFBBVEhnZW4pICMgUmVtb3ZlIGV4Y2VzcyBkYXRhDQpgYGANCg0KDQpgYGB7cn0NCiMgRGF0YSBDbGVhbmluZw0KDQpNdXNpY0NsZWFuZWQgPC0NCiAgTXVzaWMgJT4lDQogIG5hLm9taXQoKSAlPiUgI1JlbW92ZSBOQXMNCiAgdHJhbnNtdXRlKHllYXIgPSBgWWVhcltJXWApDQoNCg0KDQpgYGANCg0K</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogJ0ZpbmFsIFByb2plY3QnDQphdXRob3I6ICJEZXZhbnNoIEFnYXJ3YWwiDQpkYXRlOiAnRHVlIERhdGU6IDEyLzE1LzIwMjAnDQpvdXRwdXQ6DQogIGh0bWxfbm90ZWJvb2s6DQogICAgZGZfcHJpbnQ6IHBhZ2VkDQogIGh0bWxfZG9jdW1lbnQ6DQogICAgZGZfcHJpbnQ6IHBhZ2VkDQotLS0NCg0KYGBge3J9DQojIExpYnJhcmllcw0KDQpsaWJyYXJ5KGdlbml1cykNCmxpYnJhcnkodGlkeXZlcnNlKQ0KbGlicmFyeShxZGFwKQ0KbGlicmFyeSh0aWR5dGV4dCkNCmxpYnJhcnkocnZlc3QpDQpgYGANCg0KYGBge3J9DQojIERhdGEgU2NyYXBpbmcNCg0KcGFnZSA9ICJodHRwczovL2VuLndpa2lwZWRpYS5vcmcvd2lraS9HcmFtbXlfQXdhcmRfZm9yX1JlY29yZF9vZl90aGVfWWVhciINCg0KWFBBVEhnZW4gPSAiL2h0bWwvYm9keS9kaXZbM10vZGl2WzNdL2Rpdls1XS9kaXZbMV0vdGFibGUiDQoNCk11c2ljIDwtIGRhdGEuZnJhbWUoKQ0KDQpmb3IgKGkgaW4gNTo4KXsgIyBMb29wIGZvciBlYWNoIGRlY2FkZQ0KICAjIFNjcmFwZSB3ZWJzaXRlDQogIFRlbXAgPC0gcGFnZSAlPiUgDQogICAgcmVhZF9odG1sKCkgJT4lDQogICAgaHRtbF9ub2Rlcyh4cGF0aCA9IHBhc3RlKFhQQVRIZ2VuLCdbJyxpLCddJyxzZXAgPSAnJykpICU+JQ0KICAgIGh0bWxfdGFibGUoZmlsbCA9IFRSVUUpDQogIE11c2ljIDwtIHJiaW5kKE11c2ljLFRlbXBbWzFdXSkNCn0NCg0Kcm0oVGVtcCxpLHBhZ2UsWFBBVEhnZW4pICMgUmVtb3ZlIGV4Y2VzcyBkYXRhDQpgYGANCg0KDQpgYGB7cn0NCiMgRGF0YSBDbGVhbmluZw0KDQoNCmBgYA0KDQo=</div>
 
 
 
