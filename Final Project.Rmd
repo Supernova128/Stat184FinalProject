@@ -26,16 +26,30 @@ page = "https://en.wikipedia.org/wiki/Grammy_Award_for_Record_of_the_Year"
 
 XPATHgen = "/html/body/div[3]/div[3]/div[5]/div[1]/table"
 
-Years = c(1980,1990,2000,2010)
+Music <- data.frame()
 
-for (i in 1:4){
-  Temp <- page %>%
-  read_html() %>%
-  html_nodes(xpath = paste(XPATHgen,'[',i+4,']',sep = '')) %>%
-  html_table(fill = TRUE)
-  assign(paste('Year',Years[i], sep = ''),Temp[[1]])
+for (i in 5:8){ # Loop for each decade
+  # Scrape website
+  Temp <- page %>% 
+    read_html() %>%
+    html_nodes(xpath = paste(XPATHgen,'[',i,']',sep = '')) %>%
+    html_table(fill = TRUE)
+  Music <- rbind(Music,Temp[[1]])
 }
-rm(Temp,i,page,XPATHgen,Years)
+
+rm(Temp,i,page,XPATHgen) # Remove excess data
 ```
 
+
+```{r}
+# Data Cleaning
+
+MusicCleaned <-
+  Music %>%
+  na.omit() %>% #Remove NAs
+  transmute(year = `Year[I]`)
+
+
+
+```
 
