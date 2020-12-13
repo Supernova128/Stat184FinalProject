@@ -1801,6 +1801,8 @@ summary {
 
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBMaWJyYXJpZXNcblxubGlicmFyeShnZW5pdXMpXG5saWJyYXJ5KHRpZHl2ZXJzZSlcbmxpYnJhcnkocWRhcClcbmxpYnJhcnkodGlkeXRleHQpXG5saWJyYXJ5KHJ2ZXN0KVxuYGBgIn0= -->
 <pre class="r"><code># Libraries
@@ -1815,7 +1817,7 @@ library(rvest)</code></pre>
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBEYXRhIFNjcmFwaW5nXG5cbnBhZ2UgPSBcImh0dHBzOi8vZW4ud2lraXBlZGlhLm9yZy93aWtpL0dyYW1teV9Bd2FyZF9mb3JfUmVjb3JkX29mX3RoZV9ZZWFyXCJcblxuWFBBVEhnZW4gPSBcIi9odG1sL2JvZHkvZGl2WzNdL2RpdlszXS9kaXZbNV0vZGl2WzFdL3RhYmxlXCJcblxuTXVzaWMgPC0gZGF0YS5mcmFtZSgpXG5cbmZvciAoaSBpbiA1OjgpeyAjIExvb3AgZm9yIGVhY2ggZGVjYWRlXG4gICMgU2NyYXBlIHdlYnNpdGVcbiAgVGVtcCA8LSBwYWdlICU+JSBcbiAgICByZWFkX2h0bWwoKSAlPiVcbiAgICBodG1sX25vZGVzKHhwYXRoID0gcGFzdGUoWFBBVEhnZW4sJ1snLGksJ10nLHNlcCA9ICcnKSkgJT4lXG4gICAgaHRtbF90YWJsZShmaWxsID0gVFJVRSlcbiAgTXVzaWMgPC0gcmJpbmQoTXVzaWMsVGVtcFtbMV1dKVxufVxuXG5ybShUZW1wLGkscGFnZSxYUEFUSGdlbikgIyBSZW1vdmUgZXhjZXNzIGRhdGFcbmBgYCJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBEYXRhIFNjcmFwaW5nXG5cbnBhZ2UgPSBcImh0dHBzOi8vZW4ud2lraXBlZGlhLm9yZy93aWtpL0dyYW1teV9Bd2FyZF9mb3JfUmVjb3JkX29mX3RoZV9ZZWFyXCJcblxuWFBBVEhnZW4gPSBcIi9odG1sL2JvZHkvZGl2WzNdL2RpdlszXS9kaXZbNV0vZGl2WzFdL3RhYmxlXCJcblxuTXVzaWMgPC0gZGF0YS5mcmFtZSgpXG5cbmZvciAoaSBpbiA1OjgpeyAjIExvb3AgZm9yIGVhY2ggZGVjYWRlXG4gICMgU2NyYXBlIHdlYnNpdGVcbiAgVGVtcCA8LSBwYWdlICU+JSBcbiAgICByZWFkX2h0bWwoKSAlPiVcbiAgICBodG1sX25vZGVzKHhwYXRoID0gcGFzdGUoWFBBVEhnZW4sJ1snLGksJ10nLHNlcCA9ICcnKSkgJT4lXG4gICAgaHRtbF90YWJsZShmaWxsID0gVFJVRSlcbiAgTXVzaWMgPC0gcmJpbmQoTXVzaWMsVGVtcFtbMV1dKVxufVxuXG5ybShUZW1wLGkscGFnZSxYUEFUSGdlbikgIyBSZW1vdmUgdW5uZWVkZWQgb2JqZWN0cyBmcm9tIEVudmlyb25tZW50IFxuYGBgIn0= -->
 <pre class="r"><code># Data Scraping
 
 page = &quot;https://en.wikipedia.org/wiki/Grammy_Award_for_Record_of_the_Year&quot;
@@ -1833,25 +1835,51 @@ for (i in 5:8){ # Loop for each decade
   Music &lt;- rbind(Music,Temp[[1]])
 }
 
-rm(Temp,i,page,XPATHgen) # Remove excess data</code></pre>
+rm(Temp,i,page,XPATHgen) # Remove unneeded objects from Environment </code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBEYXRhIENsZWFuaW5nXG5cbk11c2ljQ2xlYW5lZCA8LSBcbiAgTXVzaWMgJT4lIFxuICBuYS5vbWl0KCkgJT4lICMgUmVtb3ZlIE5Bc1xuICB0cmFuc211dGUoIFxuICAgIHllYXIgPSBnc3ViKHBhdHRlcm4gPSAnKFxcXFxbXFxcXGQrXFxcXF0pJyxyZXBsYWNlbWVudCA9ICcnLHggPSBgWWVhcltJXWApLFxuICAgIHRyYWNrID0gUmVjb3JkLFxuICAgIGFydGlzdCA9IGBBcnRpc3QocylgXG4gICkgJT4lXG4gIG11dGF0ZShcbiAgICBkZWNhZGUgPSBwYXN0ZShzdWJzdHIoeWVhciwxLDMpLCcwcycsc2VwID0gJycpXG4gIClcblxuXG5cbmBgYCJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBEYXRhIENsZWFuaW5nXG5cbk11c2ljQ2xlYW5lZCA8LSBcbiAgTXVzaWMgJT4lIFxuICBuYS5vbWl0KCkgJT4lICMgUmVtb3ZlIE5Bc1xuICB0cmFuc211dGUoIFxuICAgIHllYXIgPSBnc3ViKHBhdHRlcm4gPSAnKFxcXFxbXFxcXGQrXFxcXF0pJyxyZXBsYWNlbWVudCA9ICcnLHggPSBgWWVhcltJXWApLCAjIFJlbW92ZSBmb290IG5vdGVzXG4gICAgdHJhY2sgPSBSZWNvcmQsXG4gICAgYXJ0aXN0ID0gYEFydGlzdChzKWBcbiAgKSAlPiVcbiAgbXV0YXRlKFxuICAgIGRlY2FkZSA9IHBhc3RlKHN1YnN0cih5ZWFyLDEsMyksJzBzJyxzZXAgPSAnJylcbiAgKVxuXG5ybShNdXNpYylcblxuIyBBZGQgTHlyaWNzIGFuZCB3cml0ZSB0byBDU1YgZmlsZVxuXG5MeXJpY3MgPC0gXG4gIE11c2ljQ2xlYW5lZCAlPiVcbiAgYWRkX2dlbml1cyhhcnRpc3QsIHRyYWNrLCB0eXBlID0gXCJseXJpY3NcIilcblxud3JpdGUuY3N2KEx5cmljcywnTHlyaWMuY3N2JylcbmBgYCJ9 -->
 <pre class="r"><code># Data Cleaning
 
 MusicCleaned &lt;- 
   Music %&gt;% 
   na.omit() %&gt;% # Remove NAs
   transmute( 
-    year = gsub(pattern = &#39;(\\[\\d+\\])&#39;,replacement = &#39;&#39;,x = `Year[I]`),
+    year = gsub(pattern = &#39;(\\[\\d+\\])&#39;,replacement = &#39;&#39;,x = `Year[I]`), # Remove foot notes
     track = Record,
     artist = `Artist(s)`
   ) %&gt;%
   mutate(
     decade = paste(substr(year,1,3),&#39;0s&#39;,sep = &#39;&#39;)
+  )
+
+rm(Music)
+
+# Add Lyrics and write to CSV file
+
+Lyrics &lt;- 
+  MusicCleaned %&gt;%
+  add_genius(artist, track, type = &quot;lyrics&quot;)
+
+write.csv(Lyrics,&#39;Lyric.csv&#39;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBSZWFkIGRhdGEgYmFjayBpbiBcblxuTHlyaWNzIDwtIHJlYWQuY3N2KFwiTHlyaWMuY3N2XCIsIHNlcCA9IFwiLFwiLCBoZWFkZXI9VClcblxuU29uZ3MgPC0gXG4gIEx5cmljcyAlPiVcbiAgZ3JvdXBfYnkodHJhY2ssYXJ0aXN0LHllYXIpICU+JVxuICBzdW1tYXJpc2UoXG4gICAgbGluZXMgPSBuKClcbiAgKVxuXG5gYGAifQ== -->
+<pre class="r"><code># Read data back in 
+
+Lyrics &lt;- read.csv(&quot;Lyric.csv&quot;, sep = &quot;,&quot;, header=T)
+
+Songs &lt;- 
+  Lyrics %&gt;%
+  group_by(track,artist,year) %&gt;%
+  summarise(
+    lines = n()
   )
 </code></pre>
 <!-- rnb-source-end -->
@@ -1859,7 +1887,7 @@ MusicCleaned &lt;-
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogJ0ZpbmFsIFByb2plY3QnDQphdXRob3I6ICJEZXZhbnNoIEFnYXJ3YWwiDQpkYXRlOiAnRHVlIERhdGU6IDEyLzE0LzIwMjAnDQpvdXRwdXQ6DQogIGh0bWxfbm90ZWJvb2s6DQogICAgZGZfcHJpbnQ6IHBhZ2VkDQogIGh0bWxfZG9jdW1lbnQ6DQogICAgZGZfcHJpbnQ6IHBhZ2VkDQotLS0NCg0KYGBge3J9DQojIExpYnJhcmllcw0KDQpsaWJyYXJ5KGdlbml1cykNCmxpYnJhcnkodGlkeXZlcnNlKQ0KbGlicmFyeShxZGFwKQ0KbGlicmFyeSh0aWR5dGV4dCkNCmxpYnJhcnkocnZlc3QpDQpgYGANCg0KYGBge3J9DQojIERhdGEgU2NyYXBpbmcNCg0KcGFnZSA9ICJodHRwczovL2VuLndpa2lwZWRpYS5vcmcvd2lraS9HcmFtbXlfQXdhcmRfZm9yX1JlY29yZF9vZl90aGVfWWVhciINCg0KWFBBVEhnZW4gPSAiL2h0bWwvYm9keS9kaXZbM10vZGl2WzNdL2Rpdls1XS9kaXZbMV0vdGFibGUiDQoNCk11c2ljIDwtIGRhdGEuZnJhbWUoKQ0KDQpmb3IgKGkgaW4gNTo4KXsgIyBMb29wIGZvciBlYWNoIGRlY2FkZQ0KICAjIFNjcmFwZSB3ZWJzaXRlDQogIFRlbXAgPC0gcGFnZSAlPiUgDQogICAgcmVhZF9odG1sKCkgJT4lDQogICAgaHRtbF9ub2Rlcyh4cGF0aCA9IHBhc3RlKFhQQVRIZ2VuLCdbJyxpLCddJyxzZXAgPSAnJykpICU+JQ0KICAgIGh0bWxfdGFibGUoZmlsbCA9IFRSVUUpDQogIE11c2ljIDwtIHJiaW5kKE11c2ljLFRlbXBbWzFdXSkNCn0NCg0Kcm0oVGVtcCxpLHBhZ2UsWFBBVEhnZW4pICMgUmVtb3ZlIGV4Y2VzcyBkYXRhDQpgYGANCg0KDQpgYGB7cn0NCiMgRGF0YSBDbGVhbmluZw0KDQpNdXNpY0NsZWFuZWQgPC0gDQogIE11c2ljICU+JSANCiAgbmEub21pdCgpICU+JSAjIFJlbW92ZSBOQXMNCiAgdHJhbnNtdXRlKCANCiAgICB5ZWFyID0gZ3N1YihwYXR0ZXJuID0gJyhcXFtcXGQrXFxdKScscmVwbGFjZW1lbnQgPSAnJyx4ID0gYFllYXJbSV1gKSwNCiAgICB0cmFjayA9IFJlY29yZCwNCiAgICBhcnRpc3QgPSBgQXJ0aXN0KHMpYA0KICApICU+JQ0KICBtdXRhdGUoDQogICAgZGVjYWRlID0gcGFzdGUoc3Vic3RyKHllYXIsMSwzKSwnMHMnLHNlcCA9ICcnKQ0KICApDQoNCg0KDQpgYGANCg0K</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogJ0ZpbmFsIFByb2plY3QnDQphdXRob3I6ICJEZXZhbnNoIEFnYXJ3YWwiDQpkYXRlOiAnRHVlIERhdGU6IDEyLzE0LzIwMjAnDQpvdXRwdXQ6DQogIGh0bWxfbm90ZWJvb2s6DQogICAgZGZfcHJpbnQ6IHBhZ2VkDQogIGh0bWxfZG9jdW1lbnQ6DQogICAgZGZfcHJpbnQ6IHBhZ2VkDQotLS0NCmBgYHtyIHNldHVwLCBpbmNsdWRlPUZBTFNFfQ0Ka25pdHI6Om9wdHNfY2h1bmskc2V0KHdhcm5pbmcgPSBGQUxTRSwgbWVzc2FnZSA9IEZBTFNFKQ0KYGBgDQoNCg0KYGBge3J9DQojIExpYnJhcmllcw0KDQpsaWJyYXJ5KGdlbml1cykNCmxpYnJhcnkodGlkeXZlcnNlKQ0KbGlicmFyeShxZGFwKQ0KbGlicmFyeSh0aWR5dGV4dCkNCmxpYnJhcnkocnZlc3QpDQpgYGANCg0KYGBge3J9DQojIERhdGEgU2NyYXBpbmcNCg0KcGFnZSA9ICJodHRwczovL2VuLndpa2lwZWRpYS5vcmcvd2lraS9HcmFtbXlfQXdhcmRfZm9yX1JlY29yZF9vZl90aGVfWWVhciINCg0KWFBBVEhnZW4gPSAiL2h0bWwvYm9keS9kaXZbM10vZGl2WzNdL2Rpdls1XS9kaXZbMV0vdGFibGUiDQoNCk11c2ljIDwtIGRhdGEuZnJhbWUoKQ0KDQpmb3IgKGkgaW4gNTo4KXsgIyBMb29wIGZvciBlYWNoIGRlY2FkZQ0KICAjIFNjcmFwZSB3ZWJzaXRlDQogIFRlbXAgPC0gcGFnZSAlPiUgDQogICAgcmVhZF9odG1sKCkgJT4lDQogICAgaHRtbF9ub2Rlcyh4cGF0aCA9IHBhc3RlKFhQQVRIZ2VuLCdbJyxpLCddJyxzZXAgPSAnJykpICU+JQ0KICAgIGh0bWxfdGFibGUoZmlsbCA9IFRSVUUpDQogIE11c2ljIDwtIHJiaW5kKE11c2ljLFRlbXBbWzFdXSkNCn0NCg0Kcm0oVGVtcCxpLHBhZ2UsWFBBVEhnZW4pICMgUmVtb3ZlIHVubmVlZGVkIG9iamVjdHMgZnJvbSBFbnZpcm9ubWVudCANCmBgYA0KDQoNCmBgYHtyfQ0KIyBEYXRhIENsZWFuaW5nDQoNCk11c2ljQ2xlYW5lZCA8LSANCiAgTXVzaWMgJT4lIA0KICBuYS5vbWl0KCkgJT4lICMgUmVtb3ZlIE5Bcw0KICB0cmFuc211dGUoIA0KICAgIHllYXIgPSBnc3ViKHBhdHRlcm4gPSAnKFxcW1xcZCtcXF0pJyxyZXBsYWNlbWVudCA9ICcnLHggPSBgWWVhcltJXWApLCAjIFJlbW92ZSBmb290IG5vdGVzDQogICAgdHJhY2sgPSBSZWNvcmQsDQogICAgYXJ0aXN0ID0gYEFydGlzdChzKWANCiAgKSAlPiUNCiAgbXV0YXRlKA0KICAgIGRlY2FkZSA9IHBhc3RlKHN1YnN0cih5ZWFyLDEsMyksJzBzJyxzZXAgPSAnJykNCiAgKQ0KDQpybShNdXNpYykNCg0KIyBBZGQgTHlyaWNzIGFuZCB3cml0ZSB0byBDU1YgZmlsZQ0KDQpMeXJpY3MgPC0gDQogIE11c2ljQ2xlYW5lZCAlPiUNCiAgYWRkX2dlbml1cyhhcnRpc3QsIHRyYWNrLCB0eXBlID0gImx5cmljcyIpDQoNCndyaXRlLmNzdihMeXJpY3MsJ0x5cmljLmNzdicpDQpgYGANCg0KYGBge3J9DQojIFJlYWQgZGF0YSBiYWNrIGluIA0KDQpMeXJpY3MgPC0gcmVhZC5jc3YoIkx5cmljLmNzdiIsIHNlcCA9ICIsIiwgaGVhZGVyPVQpDQoNClNvbmdzIDwtIA0KICBMeXJpY3MgJT4lDQogIGdyb3VwX2J5KHRyYWNrLGFydGlzdCx5ZWFyKSAlPiUNCiAgc3VtbWFyaXNlKA0KICAgIGxpbmVzID0gbigpDQogICkNCg0KYGBgDQoNCg==</div>
 
 
 
