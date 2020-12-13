@@ -132,4 +132,20 @@ Graph1 %>%
 ```
 #### Graph 2 
 
+```{r}
+
+Verse_words_Stopped <- read.csv("Verse_words_Stopped.csv", sep = ",", header=T)
+
+Topten <-
+  Verse_words_Stopped %>%
+  group_by(word) %>%
+  summarise(count = n()) %>%
+  arrange(desc(count)) %>%
+  top_n(10)
+
+Topten %>%
+  ggplot(aes(x = reorder(word,-count), y = count)) +
+  geom_col(fill = "#A4DF85",color = "black")
+
+```
 
