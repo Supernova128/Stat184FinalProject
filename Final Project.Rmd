@@ -8,10 +8,10 @@ output:
   html_document:
     df_print: paged
 ---
+#### Setup 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 ```
-
 
 ```{r}
 # Libraries
@@ -21,8 +21,9 @@ library(tidyverse)
 library(qdap)
 library(tidytext)
 library(rvest)
-```
 
+```
+#### Data Access
 ```{r}
 # Data Scraping
 
@@ -44,6 +45,7 @@ for (i in 5:8){ # Loop for each decade
 rm(Temp,i,page,XPATHgen) # Remove unneeded objects from Environment 
 ```
 
+#### Data Wrangling 
 
 ```{r}
 # Data Cleaning
@@ -60,28 +62,69 @@ MusicCleaned <-
     decade = paste(substr(year,1,3),'0s',sep = '')
   )
 
-rm(Music)
-
-# Add Lyrics and write to CSV file
+# Add Lyrics 
 
 Lyrics <- 
   MusicCleaned %>%
-  add_genius(artist, track, type = "lyrics")
+  add_genius(artist, track, type = "lyrics") # Got 174 songs 
 
-write.csv(Lyrics,'Lyric.csv')
+# Convert to words 
+
+Verse_words <- 
+  Lyrics %>%
+  unnest_tokens(word, lyric)
+
+# Create Data frames for both sets stop words and combine them
+
+words = c("ba","du","yeah","da","ya","ooh","gonna","na","uh","la","hol")
+
+New_Words = data.frame(word = words)
+
+data("stop_words")
+
+Stop_words <-
+  stop_words %>%
+  select(word)
+
+Stop_words <- rbind(Stop_words,New_Words) 
+
+# Create Dataframe for Verse words without stopped words
+
+Verse_words_Stopped <-
+  Verse_words %>%
+  anti_join(Stop_words,by = "word")
+
+# Clean environment 
+
+rm(Lyrics,Music,MusicCleaned,New_Words,stop_words,Stop_words,words)
+
+# Write to CSV files
+
+write.csv(Verse_words_Stopped,'Verse_words_Stopped.csv')
+write.csv(Verse_words,'Verse_words.csv')
 ```
+
+#### Data Visualization 
+
+### Graph 1
 
 ```{r}
 # Read data back in 
 
-Lyrics <- read.csv("Lyric.csv", sep = ",", header=T)
+Verse_words <- read.csv("Verse_words.csv", sep = ",", header=T)
 
-Songs <- 
-  Lyrics %>%
-  group_by(track,artist,year) %>%
-  summarise(
-    lines = n()
-  )
+# Data wrangling for first graph 
+
+Graph1 <- 
+  Verse_words %>%
+  group_by(track,artist,decade) %>%
+  summarise(count = n())
+
+# Graph boxplot
+
+Graph1 %>%
+  ggplot(aes(x = decade,y = count)) +
+  geom_boxplot()
 
 ```
 
