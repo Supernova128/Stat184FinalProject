@@ -21,7 +21,7 @@ library(tidyverse)
 library(qdap)
 library(tidytext)
 library(rvest)
-
+library(gridExtra)
 ```
 ### Data Access
 ```{r}
@@ -45,27 +45,27 @@ for (i in 5:8){ # Loop for each decade
 rm(Temp,i,page,XPATHgen) # Remove unneeded objects from Environment 
 ```
 
+I created the data frame by first creating a general xpath which had the first 
+part of the Xpath that all paths for each decade had in common.
+I then created a loop that would add the part that was different for each xpath
+at the end, then I added that table to the table with all the data. 
+
 ### Data Wrangling 
 
 ```{r}
 # Data Cleaning
 
-MusicCleaned <- 
+Lyrics <- 
   Music %>% 
   na.omit() %>% # Remove NAs
-  transmute( 
-    year = gsub(pattern = '(\\[\\d+\\])',replacement = '',x = `Year[I]`), # Remove foot notes
+  transmute(
+    year = as.numeric(gsub(pattern = '(\\[\\d+\\])',replacement = '',x = `Year[I]`)), # Remove foot notes
     track = Record,
     artist = `Artist(s)`
   ) %>%
   mutate(
     decade = paste(substr(year,1,3),'0s',sep = '')
-  )
-
-# Add Lyrics 
-
-Lyrics <- 
-  MusicCleaned %>%
+  ) %>%
   add_genius(artist, track, type = "lyrics") # Got 174 songs 
 
 # Convert to words 
@@ -96,13 +96,16 @@ Verse_words_Stopped <-
 
 # Clean environment 
 
-rm(Lyrics,Music,MusicCleaned,New_Words,stop_words,Stop_words,words)
+rm(Music,New_Words,stop_words,Stop_words,words,Lyrics)
 
 # Write to CSV files
 
 write.csv(Verse_words_Stopped,'Verse_words_Stopped.csv')
 write.csv(Verse_words,'Verse_words.csv')
 ```
+
+First, I did some basic data cleaning by removing NAs from the data frame  and removing footnotes from  year using gsub and a regular expression to catch brackets and the numbers inside of them. I also renamed Record and Artists to track and artist. I then created the decade value by taking the first 3 parts of the year variable and adding 0s to the end. I then added the lyrics with add_genius. Then, I used unnest_tokens to make each case represent a word instead of a line. Finally, I created a data frame with all the stop word with rbind and used antijoin to remove the stop words. Finally I wrote the answers to a CSV file to avoid repeating this program.
+
 
 ### Data Visualization 
 
@@ -130,32 +133,58 @@ Graph1 %>%
   xlab("Decade") +
   theme(legend.position = "none")
 ```
+It appears that the number of words heavily increased at the start of the 21st century. 
+This may be due to improvements in musical technology and being able to create longer songs. There is also more variation from 2000 onwards, this could be a increase in the variation of music
+
+
 #### Graph 2 
 
 ```{r}
 
+# Read in data
+
 Verse_words_Stopped <- read.csv("Verse_words_Stopped.csv", sep = ",", header=T)
+
+# change data to get the top ten words and how many times they are used 
 
 Topten <-
   Verse_words_Stopped %>%
   group_by(word) %>%
   summarise(count = n()) %>%
   arrange(desc(count)) %>%
-  top_n(10)
+  slice_max(n = 10,order_by = count)
 
 Topten %>%
   ggplot(aes(x = reorder(word,-count), y = count)) +
   geom_col(fill = "#A4DF85",color = "black") +
-  ggtitle()
-  ylab() + 
-  xlab
+  ggtitle(
+    "Ten Most Popular Words of Grammy Nominated Songs from 1980 - 2019.") +
+  ylab("Count") + 
+  xlab("Word")
 
 ```
+It appears that the most common word is the the word love. It appears twice as
+much as the next common word of baby. This is probably because many popular songs
+are love songs which is reflected in this graph. 
+
+
 #### Graph 3
 
 
 
 ```{r}
+
+Wordsbydecade <-
+  Verse_words_Stopped %>%
+  group_by(decade,word) %>%
+  summarise(count = n(),.groups = "drop_last") %>%
+  arrange(desc(count)) %>%
+  slice_max(order_by = count, n = 10)
+
+Wordsbydecade %>%
+  ggplot() +
+  
+  
 
 ```
 
