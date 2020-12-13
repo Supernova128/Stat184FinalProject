@@ -8,7 +8,7 @@ output:
   html_document:
     df_print: paged
 ---
-#### Setup 
+### Setup 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 ```
@@ -23,7 +23,7 @@ library(tidytext)
 library(rvest)
 
 ```
-#### Data Access
+### Data Access
 ```{r}
 # Data Scraping
 
@@ -45,7 +45,7 @@ for (i in 5:8){ # Loop for each decade
 rm(Temp,i,page,XPATHgen) # Remove unneeded objects from Environment 
 ```
 
-#### Data Wrangling 
+### Data Wrangling 
 
 ```{r}
 # Data Cleaning
@@ -104,9 +104,9 @@ write.csv(Verse_words_Stopped,'Verse_words_Stopped.csv')
 write.csv(Verse_words,'Verse_words.csv')
 ```
 
-#### Data Visualization 
+### Data Visualization 
 
-### Graph 1
+#### Graph 1
 
 ```{r}
 # Read data back in 
@@ -123,8 +123,13 @@ Graph1 <-
 # Graph boxplot
 
 Graph1 %>%
-  ggplot(aes(x = decade,y = count)) +
-  geom_boxplot()
-
+  ggplot(aes(x = decade,y = count,fill = decade)) +
+  geom_boxplot() +
+  ggtitle("Boxplots of Words per Grammy Nominated Song by Decade") +
+  ylab("Words per Song") + 
+  xlab("Decade") +
+  theme(legend.position = "none")
 ```
+#### Graph 2 
+
 
