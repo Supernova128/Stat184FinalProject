@@ -145,7 +145,20 @@ Topten <-
 
 Topten %>%
   ggplot(aes(x = reorder(word,-count), y = count)) +
-  geom_col(fill = "#A4DF85",color = "black")
+  geom_col(fill = "#A4DF85",color = "black") +
+  ggtitle()
+  ylab() + 
+  xlab
 
 ```
+#### Graph 3
+
+
+
+```{r}
+
+```
+
+
+
 
