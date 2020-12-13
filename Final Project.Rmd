@@ -1,7 +1,7 @@
 ---
 title: 'Final Project'
 author: "Devansh Agarwal"
-date: 'Due Date: 12/15/2020'
+date: 'Due Date: 12/14/2020'
 output:
   html_notebook:
     df_print: paged
@@ -43,6 +43,19 @@ rm(Temp,i,page,XPATHgen) # Remove excess data
 
 ```{r}
 # Data Cleaning
+
+MusicCleaned <- 
+  Music %>% 
+  na.omit() %>% # Remove NAs
+  transmute( 
+    year = gsub(pattern = '(\\[\\d+\\])',replacement = '',x = `Year[I]`),
+    track = Record,
+    artist = `Artist(s)`
+  ) %>%
+  mutate(
+    decade = paste(substr(year,1,3),'0s',sep = '')
+  )
+
 
 
 ```
