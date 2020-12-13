@@ -132,6 +132,7 @@ Graph1 %>%
   ylab("Words per Song") + 
   xlab("Decade") +
   theme(legend.position = "none")
+rm(Graph1)
 ```
 It appears that the number of words heavily increased at the start of the 21st century. 
 This may be due to improvements in musical technology and being able to create longer songs. There is also more variation from 2000 onwards, this could be a increase in the variation of music
@@ -161,11 +162,11 @@ Topten %>%
     "Ten Most Popular Words of Grammy Nominated Songs from 1980 - 2019.") +
   ylab("Count") + 
   xlab("Word")
-
+rm(Topten)
 ```
 It appears that the most common word is the the word love. It appears twice as
 much as the next common word of baby. This is probably because many popular songs
-are love songs which is reflected in this graph. 
+are love songs which is reflected in this graph. Also, love is a common word that would be used in many different songs while the other words might not be as common across songs. 
 
 
 #### Graph 3
@@ -174,6 +175,8 @@ are love songs which is reflected in this graph.
 
 ```{r}
 
+# Create base dataset
+
 Wordsbydecade <-
   Verse_words_Stopped %>%
   group_by(decade,word) %>%
@@ -181,10 +184,30 @@ Wordsbydecade <-
   arrange(desc(count)) %>%
   slice_max(order_by = count, n = 10)
 
-Wordsbydecade %>%
-  ggplot() +
-  
-  
+# Create graphs for each decade
+decades <- unique(Wordsbydecade$decade)
+
+colors <- c("pink","Purple","red","blue")
+
+for (index in 1:length(decades)){
+  Graphtemp <-
+    Wordsbydecade %>%
+    filter(decade == decades[index]) %>%
+    ggplot() + 
+    aes(x = reorder(word,-count),y = count) +
+    geom_col(fill = colors[index],color = "black") +
+    ggtitle(decades[index]) +
+    ylab("Count") + 
+    xlab("Word")
+    assign(paste('Graph',decades[index],sep = ''),Graphtemp)
+} 
+rm(Graphtemp,index,decades,colors)
+
+# Combine graphs
+
+grid.arrange(Graph1980s,Graph1990s,Graph2000s,Graph2010s,ncol = 2)
+
+
 
 ```
 
