@@ -196,9 +196,8 @@ for (index in 1:length(decades)){
     ggplot() + 
     aes(x = reorder(word,-count),y = count) +
     geom_col(fill = colors[index],color = "black") +
-    ggtitle(decades[index]) +
-    ylab("Count") + 
-    xlab("Word")
+    theme(text = element_text(color = "black"),axis.text.x = element_text(angle = 45)) +
+    labs(title = decades[index], x = "Word" , y = "Count")
     assign(paste('Graph',decades[index],sep = ''),Graphtemp)
 } 
 
@@ -206,13 +205,14 @@ for (index in 1:length(decades)){
 # Combine graphs
 
 grid.arrange(Graph1980s,Graph1990s,Graph2000s,Graph2010s,nrow = 2, top = "Top Ten Words by Decade")
-
-rm(Graphtemp,index,decades,colors,Graph1980s,Graph1990s,Graph2000s,Graph2010s,Wordsbydecade)
 ```
 
 #### Graph 4
 
 ```{r}
+
+rm(Graphtemp,index,decades,colors,Graph1980s,Graph1990s,Graph2000s,Graph2010s,Wordsbydecade)
+
 # Data wrangling 
 data('sentiments')
 
