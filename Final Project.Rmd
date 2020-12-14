@@ -263,7 +263,7 @@ rm(sentiments,Sentiments)
 Music_Sentiments %>%
   ggplot(aes(x = year,y = net_sentiment,fill = decade)) +
   geom_col() +
-  labs(title = "Net Setiment Score by Year", x = "Year", y =" Net Sentiment")  
+  labs(title = "Net Sentiment Score by Year", x = "Year", y =" Net Sentiment")  
 ```
 It appears that that in each decade, a few years are outliers in the amount of
 sentiment they have. For example, the sentiment score of 2011 was a mere 3 while
