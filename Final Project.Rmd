@@ -159,7 +159,7 @@ rm(Graph1)
 
 Verse_words_Stopped <- read.csv("Verse_words_Stopped.csv", sep = ",", header=T)
 
-# change data to get the top ten words and how many times they are used 
+# Data wrangling
 
 Topten <-
   Verse_words_Stopped %>%
@@ -167,6 +167,8 @@ Topten <-
   summarise(count = n()) %>%
   arrange(desc(count)) %>%
   slice_max(n = 10,order_by = count)
+
+# Graph data
 
 Topten %>%
   ggplot(aes(x = reorder(word,-count), y = count)) +
@@ -192,7 +194,7 @@ common across songs.
 
 rm(Topten)
 
-# Create base dataset
+# Data wrangling
 
 Wordsbydecade <-
   Verse_words_Stopped %>%
@@ -202,6 +204,7 @@ Wordsbydecade <-
   slice_max(order_by = count, n = 10)
 
 # Create graphs for each decade
+
 decades <- unique(Wordsbydecade$decade)
 
 colors <- c("pink","Purple","red","blue")
@@ -236,6 +239,7 @@ in relation to love songs which utilize baby as a term of endearment.
 rm(Graphtemp,index,decades,colors,Graph1980s,Graph1990s,Graph2000s,Graph2010s,Wordsbydecade)
 
 # Data wrangling 
+
 data('sentiments')
 
 Sentiments <-
@@ -254,6 +258,8 @@ Music_Sentiments <-
 
 rm(sentiments,Sentiments)
 
+# Graph
+
 Music_Sentiments %>%
   ggplot(aes(x = year,y = net_sentiment,fill = decade)) +
   geom_col() +
@@ -270,10 +276,14 @@ we enjoy have a large variation in sentiment.
 
 ```{r}
 
+# Data Wrangling
+
 Mean_Sentiments <-
   Music_Sentiments %>%
   group_by(decade) %>%
   summarise(mean = mean(net_sentiment))
+
+# Graph
 
 Mean_Sentiments %>%
   ggplot() +
@@ -289,6 +299,9 @@ and how they impact song sentiment per decade.
 
 #### Graph 6 
 ```{r}
+
+# Graph
+
 Music_Sentiments %>%
   ggplot() +
   aes(x = year,y = net_sentiment, color = decade) +
