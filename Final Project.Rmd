@@ -201,16 +201,36 @@ for (index in 1:length(decades)){
     xlab("Word")
     assign(paste('Graph',decades[index],sep = ''),Graphtemp)
 } 
-rm(Graphtemp,index,decades,colors)
+
 
 # Combine graphs
 
-grid.arrange(Graph1980s,Graph1990s,Graph2000s,Graph2010s,ncol = 2)
+grid.arrange(Graph1980s,Graph1990s,Graph2000s,Graph2010s,nrow = 2, top = "Top Ten Words by Decade")
 
-
-
+rm(Graphtemp,index,decades,colors,Graph1980s,Graph1990s,Graph2000s,Graph2010s,Wordsbydecade)
 ```
 
+#### Graph 4
 
+```{r}
+
+data('sentiments')
+
+Sentiments <-
+  sentiments %>%
+  mutate(
+    sentiment = ifelse(sentiment == 'positive',1,0)
+  )
+
+Music_Sentiments <-
+  Verse_words_Stopped %>%
+  right_join(Sentiments, by = "word") %>%
+  select(decade,year,sentiment) 
+
+Music_Sentiments %>%
+  ggplot(aes(x = year,y = sentiment,fill = decade)) +
+  geom_col() +
+  labs(title = "Net Setiment Score by Year", x = "Year", y =" Net Sentiment") 
+```
 
 
