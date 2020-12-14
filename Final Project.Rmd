@@ -104,8 +104,8 @@ rm(Music,New_Words,stop_words,Stop_words,words,Lyrics)
 
 # Write to CSV files
 
-write.csv(Verse_words_Stopped,'Verse_words_Stopped.csv')
-write.csv(Verse_words,'Verse_words.csv')
+#write.csv(Verse_words_Stopped,'Verse_words_Stopped.csv')
+#write.csv(Verse_words,'Verse_words.csv')
 ```
 
 First, I did some basic data cleaning by removing NAs from the data frame using na.omit
@@ -124,7 +124,7 @@ rbind and used antijoin to remove the stop words.
 ```{r}
 # Read data back in 
 
-Verse_words <- read.csv("Verse_words.csv", sep = ",", header=T)
+#Verse_words <- read.csv("Verse_words.csv", sep = ",", header=T)
 
 # Data wrangling for first graph 
 
@@ -157,7 +157,7 @@ rm(Graph1)
 
 # Read in data
 
-Verse_words_Stopped <- read.csv("Verse_words_Stopped.csv", sep = ",", header=T)
+#Verse_words_Stopped <- read.csv("Verse_words_Stopped.csv", sep = ",", header=T)
 
 # Data wrangling
 
