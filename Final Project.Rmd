@@ -225,12 +225,15 @@ Sentiments <-
 Music_Sentiments <-
   Verse_words_Stopped %>%
   right_join(Sentiments, by = "word") %>%
-  select(decade,year,sentiment) 
+  select(decade,year,sentiment) %>%
+  group_by(year) %>%
+  summarise(decade = first(decade), net_sentiment = sum(sentiment)) %>%
+  na.omit()
 
 rm(sentiments,Sentiments)
 
 Music_Sentiments %>%
-  ggplot(aes(x = year,y = sentiment,fill = decade)) +
+  ggplot(aes(x = year,y = net_sentiment,fill = decade)) +
   geom_col() +
   labs(title = "Net Setiment Score by Year", x = "Year", y =" Net Sentiment")  
 ```
@@ -241,11 +244,10 @@ Music_Sentiments %>%
 
 ```{r}
 
-Mean_Sentiments <- 
+Mean_Sentiments <-
   Music_Sentiments %>%
   group_by(decade) %>%
-  summarise(mean = sum(sentiment)/10) %>%
-  na.omit
+  summarise(mean = mean(net_sentiment))
 
 Mean_Sentiments %>%
   ggplot() +
@@ -258,3 +260,17 @@ Mean_Sentiments %>%
 
 
 #### Graph 6 
+```{r}
+
+Music_Sentiments %>%
+  ggplot() +
+  aes(x = year,y = net_sentiment, color = decade) +
+  geom_smooth(se = FALSE, color = "blue") + 
+  geom_point() +
+  labs(title = "Net Sentiment Score by Year of Grammy Nominated Records from 1980 - 2019 with Linear Model Fit", x = "Year",y = "Net Sentiment")
+  
+  
+  
+
+```
+
