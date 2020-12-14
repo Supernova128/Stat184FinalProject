@@ -213,7 +213,7 @@ rm(Graphtemp,index,decades,colors,Graph1980s,Graph1990s,Graph2000s,Graph2010s,Wo
 #### Graph 4
 
 ```{r}
-
+# Data wrangling 
 data('sentiments')
 
 Sentiments <-
@@ -227,10 +227,34 @@ Music_Sentiments <-
   right_join(Sentiments, by = "word") %>%
   select(decade,year,sentiment) 
 
+rm(sentiments,Sentiments)
+
 Music_Sentiments %>%
   ggplot(aes(x = year,y = sentiment,fill = decade)) +
   geom_col() +
-  labs(title = "Net Setiment Score by Year", x = "Year", y =" Net Sentiment") 
+  labs(title = "Net Setiment Score by Year", x = "Year", y =" Net Sentiment")  
 ```
 
 
+
+#### Graph 5
+
+```{r}
+
+Mean_Sentiments <- 
+  Music_Sentiments %>%
+  group_by(decade) %>%
+  summarise(mean = sum(sentiment)/10) %>%
+  na.omit
+
+Mean_Sentiments %>%
+  ggplot() +
+  aes(x = decade,y = mean, fill = decade) +
+  geom_col() +
+  theme(legend.position = "None") +
+  labs(title = "Mean Sentiment Score by Decade",x = "Decade", y = "Mean Sentiment Score")
+
+```
+
+
+#### Graph 6 
