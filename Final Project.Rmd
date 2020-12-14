@@ -104,8 +104,14 @@ write.csv(Verse_words_Stopped,'Verse_words_Stopped.csv')
 write.csv(Verse_words,'Verse_words.csv')
 ```
 
-First, I did some basic data cleaning by removing NAs from the data frame  and removing footnotes from  year using gsub and a regular expression to catch brackets and the numbers inside of them. I also renamed Record and Artists to track and artist. I then created the decade value by taking the first 3 parts of the year variable and adding 0s to the end. I then added the lyrics with add_genius. Then, I used unnest_tokens to make each case represent a word instead of a line. Finally, I created a data frame with all the stop word with rbind and used antijoin to remove the stop words. Finally I wrote the answers to a CSV file to avoid repeating this program.
-
+First, I did some basic data cleaning by removing NAs from the data frame using na.omit
+and removing footnotes from year using gsub and a regular expression to catch 
+brackets and the numbers inside of them. I also renamed Record and Artists to 
+track and artist. I then created the decade value by taking the first 3 parts of 
+the year variable and adding 0s to the end. I then added the lyrics with
+add_genius. Then, I used unnest_tokens to make each case represent a word 
+instead of a line. Finally, I created a data frame with all the stop word with
+rbind and used antijoin to remove the stop words. 
 
 ### Data Visualization 
 
@@ -132,15 +138,18 @@ Graph1 %>%
   ylab("Words per Song") + 
   xlab("Decade") +
   theme(legend.position = "none")
-rm(Graph1)
 ```
-It appears that the number of words heavily increased at the start of the 21st century. 
-This may be due to improvements in musical technology and being able to create longer songs. There is also more variation from 2000 onwards, this could be a increase in the variation of music
+It appears that the number of words heavily increased at the start of the 21st 
+century. This may be due to improvements in musical technology and being able to
+create longer songs. There is also more variation from 2000 onward, this could
+be a increase in the variation of music
 
 
 #### Graph 2 
 
 ```{r}
+
+rm(Graph1)
 
 # Read in data
 
@@ -162,11 +171,13 @@ Topten %>%
     "Ten Most Popular Words of Grammy Nominated Songs from 1980 - 2019.") +
   ylab("Count") + 
   xlab("Word")
-rm(Topten)
 ```
 It appears that the most common word is the the word love. It appears twice as
 much as the next common word of baby. This is probably because many popular songs
-are love songs which is reflected in this graph. Also, love is a common word that would be used in many different songs while the other words might not be as common across songs. 
+are love songs which is reflected in this graph. Also, love is a common word
+that would be used in many different songs while the other words might not be as
+common across songs. 
+
 
 
 #### Graph 3
@@ -174,6 +185,8 @@ are love songs which is reflected in this graph. Also, love is a common word tha
 
 
 ```{r}
+
+rm(Topten)
 
 # Create base dataset
 
@@ -196,7 +209,7 @@ for (index in 1:length(decades)){
     ggplot() + 
     aes(x = reorder(word,-count),y = count) +
     geom_col(fill = colors[index],color = "black") +
-    theme(text = element_text(color = "black"),axis.text.x = element_text(angle = 45)) +
+    theme(text = element_text(color = "black"),axis.text.x = element_text(angle = 45,hjust = 1.3)) +
     labs(title = decades[index], x = "Word" , y = "Count")
     assign(paste('Graph',decades[index],sep = ''),Graphtemp)
 } 
@@ -206,6 +219,11 @@ for (index in 1:length(decades)){
 
 grid.arrange(Graph1980s,Graph1990s,Graph2000s,Graph2010s,nrow = 2, top = "Top Ten Words by Decade")
 ```
+From this graph, you can tell that The across all decades, the word love appears
+the most. The more interesting statistic is the words after. For example, in
+1990s and the 2000s, the word baby became relatively popular. This most likely
+in relation to love songs which utilize baby as a term of endearment. 
+
 
 #### Graph 4
 
@@ -237,7 +255,11 @@ Music_Sentiments %>%
   geom_col() +
   labs(title = "Net Setiment Score by Year", x = "Year", y =" Net Sentiment")  
 ```
-
+It appears that that in each decade, a few years are outliers in the amount of
+sentiment they have. For example, the sentiment score of 2011 was a mere 3 while
+the sentiment score of 2016 was a whopping 103. This could just be due to the 
+individual variations of songs. However, it may also show that the type of songs
+we enjoy have a large variation in sentiment. 
 
 
 #### Graph 5
@@ -257,7 +279,9 @@ Mean_Sentiments %>%
   labs(title = "Mean Sentiment Score by Decade",x = "Decade", y = "Mean Sentiment Score")
 
 ```
-
+Sentiment by decade appears to have decreased in 1990s and 2000s while it was 
+higher in 1980s and 2010s. This could be reflective of the feelings at the time
+and how they impact song sentiment per decade.
 
 #### Graph 6 
 ```{r}
@@ -270,4 +294,7 @@ Music_Sentiments %>%
   theme(title = element_text(size = 8)) +
   labs(title = "Net Sentiment Score by Year of Grammy Nominated Records from 1980 - 2019 with Linear Model Fit", x = "Year",y = "Net Sentiment")
 ```
-
+This graph shows a simple regression line to show the changes in net sentiment
+score by year. It is easy to see that the sentiment score appeared be decreasing
+in the 1990s but picked again in mid 2000s. This could be due to natural changes
+or due to an important event the occured during that time period. 
