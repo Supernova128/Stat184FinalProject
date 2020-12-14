@@ -67,8 +67,8 @@ Lyrics <-
 
 # Add extra variables
 
-Lyric <-
-  Lyric %>%
+Lyrics <-
+  Lyrics %>%
   mutate(decade = paste(substr(year,1,3),'0s',sep = '')) %>%
   add_genius(artist, track, type = "lyrics") 
 
