@@ -261,16 +261,13 @@ Mean_Sentiments %>%
 
 #### Graph 6 
 ```{r}
-
 Music_Sentiments %>%
   ggplot() +
   aes(x = year,y = net_sentiment, color = decade) +
-  geom_smooth(se = FALSE, color = "blue") + 
+  geom_smooth(se = FALSE, color = "blue", lm = TRUE) + 
   geom_point() +
+  theme_bw() +
+  theme(title = element_text(size = 8)) +
   labs(title = "Net Sentiment Score by Year of Grammy Nominated Records from 1980 - 2019 with Linear Model Fit", x = "Year",y = "Net Sentiment")
-  
-  
-  
-
 ```
 
