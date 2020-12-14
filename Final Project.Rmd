@@ -298,3 +298,6 @@ This graph shows a simple regression line to show the changes in net sentiment
 score by year. It is easy to see that the sentiment score appeared be decreasing
 in the 1990s but picked again in mid 2000s. This could be due to natural changes
 or due to an important event the occured during that time period. 
+
+### Zoom Presentation & Webpage
+https://supernova128.github.io/Stat184FinalProject/Final%20Project.nb.html
