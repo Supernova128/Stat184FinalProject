@@ -1,21 +1,27 @@
 ---
 title: 'Final Project'
 author: "Devansh Agarwal"
-date: 'Due Date: 12/14/2020'
+date: '`r Sys.Date()`'
 output:
-  html_notebook:
-    df_print: paged
   html_document:
+    toc: yes
+    toc_float: yes
+    number_sections: no
+    theme: lumen
     df_print: paged
+    code_folding: hide
+  pdf_document:
+    toc: yes
+  html_notebook:
+    toc: yes
+    toc_float: yes
+    number_sections: yes
+    theme: lumen
 ---
-### Setup 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(warning = FALSE, message = FALSE)
-```
+# Setup
 
-```{r}
-# Packages
-
+## Packages
+```{r,warning=FALSE,message=FALSE}
 library(genius)
 library(tidyverse)
 library(qdap)
@@ -23,7 +29,9 @@ library(tidytext)
 library(rvest)
 library(gridExtra)
 ```
-### Data Access
+
+## Data Access
+
 ```{r}
 # Data Scraping
 
@@ -51,9 +59,9 @@ I then created a loop that would add the part that was different for each xpath
 at the end and read that table, then I added that table to the table 
 with all the data. 
 
-### Data Wrangling 
+## Data Wrangling 
 
-```{r}
+```{r,warning=FALSE,message=FALSE}
 # Data Cleaning
 
 Lyrics <- 
@@ -104,8 +112,8 @@ rm(Music,New_Words,stop_words,Stop_words,words,Lyrics)
 
 # Write to CSV files
 
-#write.csv(Verse_words_Stopped,'Verse_words_Stopped.csv')
-#write.csv(Verse_words,'Verse_words.csv')
+# write.csv(Verse_words_Stopped,'Verse_words_Stopped.csv')
+# write.csv(Verse_words,'Verse_words.csv')
 ```
 
 First, I did some basic data cleaning by removing NAs from the data frame using na.omit
@@ -117,11 +125,12 @@ add_genius. Then, I used unnest_tokens to make each case represent a word
 instead of a line. Finally, I created a data frame with all the stop word with
 rbind and used antijoin to remove the stop words. 
 
-### Data Visualization 
 
-#### Graph 1
+# Data Visualization 
 
-```{r}
+## Graph 1
+
+```{r,warning=FALSE,message=FALSE}
 # Read data back in 
 
 #Verse_words <- read.csv("Verse_words.csv", sep = ",", header=T)
@@ -143,13 +152,14 @@ Graph1 %>%
   xlab("Decade") +
   theme(legend.position = "none")
 ```
+
 It appears that the number of words heavily increased at the start of the 21st 
 century. This may be due to improvements in musical technology and being able to
 create longer songs. There is also more variation from 2000 onward, this could
 be a increase in the variation of music
 
 
-#### Graph 2 
+## Graph 2 
 
 ```{r}
 
@@ -178,6 +188,7 @@ Topten %>%
   ylab("Count") + 
   xlab("Word")
 ```
+
 It appears that the most common word is the the word love. It appears twice as
 much as the next common word of baby. This is probably because many popular songs
 are love songs which is reflected in this graph. Also, love is a common word
@@ -186,7 +197,7 @@ common across songs.
 
 
 
-#### Graph 3
+## Graph 3
 
 
 
@@ -226,13 +237,14 @@ for (index in 1:length(decades)){
 
 grid.arrange(Graph1980s,Graph1990s,Graph2000s,Graph2010s,nrow = 2, top = "Top Ten Words by Decade")
 ```
+
 From this graph, you can tell that The across all decades, the word love appears
 the most. The more interesting statistic is the words after. For example, in
 1990s and the 2000s, the word baby became relatively popular. This most likely
 in relation to love songs which utilize baby as a term of endearment. 
 
 
-#### Graph 4
+## Graph 4
 
 ```{r}
 
@@ -265,6 +277,7 @@ Music_Sentiments %>%
   geom_col() +
   labs(title = "Net Sentiment Score by Year", x = "Year", y =" Net Sentiment")  
 ```
+
 It appears that that in each decade, a few years are outliers in the amount of
 sentiment they have. For example, the sentiment score of 2011 was a mere 3 while
 the sentiment score of 2016 was a whopping 103. This could just be due to the 
@@ -272,7 +285,7 @@ individual variations of songs. However, it may also show that the type of songs
 we enjoy have a large variation in sentiment. 
 
 
-#### Graph 5
+## Graph 5
 
 ```{r}
 
@@ -293,29 +306,29 @@ Mean_Sentiments %>%
   labs(title = "Mean Sentiment Score by Decade",x = "Decade", y = "Mean Sentiment Score")
 
 ```
+
 Sentiment by decade appears to have decreased in 1990s and 2000s while it was 
 higher in 1980s and 2010s. This could be reflective of the feelings at the time
 and how they impact song sentiment per decade.
 
-#### Graph 6 
-```{r}
-
+## Graph 6 
+```{r,warning=FALSE,message=FALSE}
 # Graph
 
 Music_Sentiments %>%
   ggplot() +
   aes(x = year,y = net_sentiment, color = decade) +
-  geom_smooth(se = FALSE, color = "blue", lm = TRUE) + 
+  geom_smooth(se = FALSE, color = "blue") + 
   geom_point() +
   theme_bw() +
   theme(title = element_text(size = 8)) +
-  labs(title = "Net Sentiment Score by Year of Grammy Nominated Records from 1980 - 2019 with Linear Model Fit", x = "Year",y = "Net Sentiment")
+  labs(title = "Net Sentiment Score by Year of Grammy Nominated Records from 1980 - 2019", x = "Year",y = "Net Sentiment")
 ```
+
 This graph shows a simple regression line to show the changes in net sentiment
 score by year. It is easy to see that the sentiment score appeared be decreasing
 in the 1990s but picked again in mid 2000s. This could be due to natural changes
 or due to an important event the occurred during that time period. 
 
-### Zoom Presentation & Webpage
-https://supernova128.github.io/Stat184FinalProject/Final%20Project.nb.html
-https://pennstateoffice365-my.sharepoint.com/:v:/g/personal/dqa5365_psu_edu/EboH6XaOLAlJt0vJBbBNS_8BIrU6DT6hL65rH3oY0WaAqg?e=y8JQJI 
+# Webpage
+https://supernova128.github.io/Stat184FinalProject/Final_Project.html
